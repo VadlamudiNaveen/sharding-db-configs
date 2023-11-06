@@ -32,7 +32,7 @@ services:
     ## copy the manual_schema.sql to /docker-entrypoint-initdb.d/ . this will init the sql file when the Postgres in container start up
     volumes:
       - ../src/resources/hds/manual-schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      #- ./postgres-data:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
