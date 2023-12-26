@@ -36,4 +36,4 @@ Before you begin, make sure you have the following installed:
 To get started, clone the ShardingSphere repository:
 
 ```bash
-git clone https://github.com/apache/shardingsphere.git
+https://github.com/VadlamudiNaveen/sharding-db-configs.git
