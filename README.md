@@ -28,8 +28,7 @@ This README provides a guide on how to use ShardingSphere to build and manage sh
 
 Before you begin, make sure you have the following installed:
 
-- Java Development Kit (JDK) 8 or later
-- Maven
+- Docker 
 
 ### Installation
 
