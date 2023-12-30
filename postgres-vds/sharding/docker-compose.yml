@@ -23,19 +23,34 @@ services:
     ## port binding to 5432, you could change to 15432:5432 or any other available port you want
     ports:
       - "5432:5432"
-    command: postgres -c 'max_connections=500' -c 'shared_buffers=512MB'
     container_name: shardingsphere-example-postgres
+    command: postgres -c 'max_connections=2000' -c 'shared_buffers=1024MB'
     ## you could access Postgres like `psql -d your_database_name -h 127.0.0.1 -U root -p 5432 -W`
     environment:
-     - TZ=America/Edmonton
-     - POSTGRES_USER=postgres
-     - POSTGRES_PASSWORD=postgres
-     #- POSTGRES_INITDB_ARGS:"--max_connections=500 --shared_buffers=512MB" 
-    ## copy the manual_schema.sql to /docker-entrypoint-initdb.d/ . this will init the sql file when the Postgres in container start up
+      - TZ=America/Edmonton
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=tetramax2070*&
+     ## copy the schema.sql to /docker-entrypoint-initdb.d/ . this will init the sql file when the Postgres in container start up
     volumes:
-      - ../../../src/resources/vds/manual-schema.sql:/docker-entrypoint-initdb.d/manual-schema.sql
-      #- ./postgres-data:/var/lib/postgresql/data
-      
+      - ../src/resources/vds/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./postgres-log:/var/log/postgresql/
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 16G
+        reservations:
+          cpus: '4'
+          memory: 12G
+      restart_policy:
+          condition: on-failure  
 
   proxy:
     ## get more versions of proxy here : https://hub.docker.com/r/apache/shardingsphere-proxy/tags
@@ -57,5 +72,15 @@ services:
      - ../../tools/wait-for-it.sh:/opt/wait-for-it.sh
     environment:
      - JVM_OPTS="-Djava.awt.headless=true"
+    restart: always
+    deploy:
+        resources:
+          limits:
+            cpus: '4'
+            memory: 12G
+          reservations:
+            cpus: '4'
+            memory: 10G
+    
     
 
