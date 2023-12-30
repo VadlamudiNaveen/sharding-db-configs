@@ -1,0 +1,4 @@
+postgres-hds/sharding/postgres-data/
+postgres-hs/sharding/postgres-data/
+postgres-hds/sharding/postgres-log
+postgres-hs/sharding/postgres-log

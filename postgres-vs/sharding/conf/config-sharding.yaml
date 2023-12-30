@@ -33,12 +33,38 @@ dataSources:
   ds_0:
     url: jdbc:postgresql://shardingsphere-example-postgres:5432/ds_0?useUnicode=true&characterEncoding=utf-8&allowEncodingChanges=true
     username: postgres
-    password: postgres
+    password: tetramax2070*&
     connectionTimeoutMilliseconds: 30000
     idleTimeoutMilliseconds: 60000
     maxLifetimeMilliseconds: 1800000
     maxPoolSize: 50
 
+  ds_1:
+    url: jdbc:postgresql://shardingsphere-example-postgres:5432/ds_1?useUnicode=true&characterEncoding=utf-8&allowEncodingChanges=true
+    username: postgres
+    password: tetramax2070*&
+    connectionTimeoutMilliseconds: 30000
+    idleTimeoutMilliseconds: 60000
+    maxLifetimeMilliseconds: 1800000
+    maxPoolSize: 50
+
+  ds_2:
+    url: jdbc:postgresql://shardingsphere-example-postgres:5432/ds_2?useUnicode=true&characterEncoding=utf-8&allowEncodingChanges=true
+    username: postgres
+    password: tetramax2070*&
+    connectionTimeoutMilliseconds: 30000
+    idleTimeoutMilliseconds: 60000
+    maxLifetimeMilliseconds: 1800000
+    maxPoolSize: 50
+  
+  ds_3:
+    url: jdbc:postgresql://shardingsphere-example-postgres:5432/ds_3?useUnicode=true&characterEncoding=utf-8&allowEncodingChanges=true
+    username: postgres
+    password: tetramax2070*&
+    connectionTimeoutMilliseconds: 30000
+    idleTimeoutMilliseconds: 60000
+    maxLifetimeMilliseconds: 1800000
+    maxPoolSize: 50
 
 rules:
 - !SHARDING

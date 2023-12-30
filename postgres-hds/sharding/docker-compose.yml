@@ -28,17 +28,28 @@ services:
     environment:
      - TZ=America/Edmonton
      - POSTGRES_USER=postgres
-     - POSTGRES_PASSWORD=postgres
+     - POSTGRES_PASSWORD=tetramax2070*&
     ## copy the manual_schema.sql to /docker-entrypoint-initdb.d/ . this will init the sql file when the Postgres in container start up
     volumes:
-      - ../src/resources/hds/manual-schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ../src/resources/hds/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - ./postgres-data:/var/lib/postgresql/data
+      - ./postgres-log:/var/log/postgresql/
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 30s
       timeout: 10s
       retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 16G
+        reservations:
+          cpus: '4'
+          memory: 12G
+      restart_policy:
+          condition: on-failure
 
 
   proxy:
@@ -61,5 +72,14 @@ services:
      - ../../tools/wait-for-it.sh:/opt/wait-for-it.sh
     environment:
      - JVM_OPTS="-Djava.awt.headless=true"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 12G
+        reservations:
+          cpus: '4'
+          memory: 10G
     
 
